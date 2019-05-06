@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Layui 三栏穿梭框-TransferThree</title>
+    <link rel="stylesheet" href="layui/layui/css/layui.css">
+</head>
+
+<body>
+    <div class="layui-container" style="margin-top: 15px;">
+        <div class="layui-btn-group">
+            <button class="layui-btn all">获取全部数据</button>
+            <button class="layui-btn left">获取左边数据</button>
+            <button class="layui-btn right1">获取右上数据</button>
+            <button class="layui-btn right2">获取右下数据</button>
+        </div>
+        <fieldset class="layui-elem-field">
+            <legend>投入产出指标选择</legend>
+            <div class="layui-field-box">
+                <div class="layui-row layui-col-space15">
+                    <div id="transferT"></div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</body>
+<script type="text/javascript" src="layui/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: 'layui_exts/transferThree/'
+    }).use(['transferThree'], function () {
+        var transferT = layui.transferThree,
+            $ = layui.$;
+        //数据源
+        var res = {
+        "target": [{
+            "logogram": "FSTI",
+            "name": "科技机构经费(千万元) "
+        },
+        {
+            "logogram": "NRDI",
+            "name": "研究与开发机构数(个)"
+        },
+        {
+            "logogram": "NEI",
+            "name": "有研发机构的企业数(个) "
+        },
+        {
+            "logogram": "PFE",
+            "name": "R&D人员数(万人) "
+        },
+        {
+            "logogram": "RDF",
+            "name": "R&D经费(千万元) "
+        },
+        {
+            "logogram": "NRDF",
+            "name": "R&D项目数(百项)"
+        },
+        {
+            "logogram": "EIT",
+            "name": "引进技术经费支出(千万元) "
+        },
+        {
+            "logogram": "NSTP",
+            "name": "科技项目数(项) "
+        },
+        {
+            "logogram": "NPDP",
+            "name": "新产品开发项目数(项) "
+        },
+        {
+            "logogram": "NPA",
+            "name": "专利申请数(项) "
+        },
+        {
+            "logogram": "NPI",
+            "name": "拥有发明专利数(项)  "
+        },
+        {
+            "logogram": "PSP",
+            "name": "发表科技论文(篇)"
+        },
+        {
+            "logogram": "EVHP",
+            "name": "高技术产品出口贸易额(千万美元)"
+        }
+        ],
+        input: [],
+        output: []
+    }
+        //表格列
+        var cols1 = [{
+            type: 'checkbox',
+            fixed: 'left'
+        }, {
+            field: 'name',
+            title: '投入产出指标'
+        }, {
+            field: 'logogram',
+            title: '简写',
+            hide: true
+        }]
+        var cols2 = [{
+            type: 'checkbox',
+            fixed: 'left'
+        }, {
+            field: 'name',
+            title: '投入指标'
+        }, {
+            field: 'logogram',
+            title: '简写',
+            hide: true
+        }]
+        var cols3 = [{
+            type: 'checkbox',
+            fixed: 'left'
+        }, {
+            field: 'name',
+            title: '产出指标'
+        }, {
+            field: 'logogram',
+            title: '简写',
+            hide: true
+        }]
+        //表格配置文件
+        var tabConfig = {
+            'limits': 100
+        }
+
+        var tb = transferT.render({
+            elem: "#transferT", //指定元素
+            cols: [cols1, cols2, cols3], //表格列  支持layui数据表格所有配置
+            data: [res.target, res.input, res.output], //[左表数据,右上表数据,右下表数据]
+            tabConfig: tabConfig //表格配置项 支持layui数据表格所有配置
+        })
+
+        /*transferT.get(p1,p2,p3)
+            参数1(p1): 初始化返回值,
+            参数2(p2): 获取数据[all,left(l),right1(r1,right2,r2)],
+            参数3(p3): 指定数据字段(例如：id)
+        */
+        //获取数据
+        $('.all').on('click', function () {
+            var data = transferT.get(tb, 'all');
+            layer.msg(JSON.stringify(data))
+        });
+        $('.left').on('click', function () {
+            var data = transferT.get(tb, 'l', 'logogram');
+            layer.msg(JSON.stringify(data))
+        });
+        $('.right1').on('click', function () {
+            var data = transferT.get(tb, 'r1');
+            layer.msg(JSON.stringify(data))
+        });
+        $('.right2').on('click', function () {
+            var data = transferT.get(tb, 'r2');
+            layer.msg(JSON.stringify(data))
+        });
+    })
+
+</script>
+
+</html>
