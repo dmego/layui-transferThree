@@ -2,6 +2,8 @@
 
 >项目中需要用到穿梭框组件，且是`左一右二`这种类型的，于是基于[layui-transfer](https://github.com/9499574/layui-transfer) 做了二次开发
 
+- 演示地址：https://dmego.me/layui-transferThree/
+
 ## 截图
 
 ![](tmp.png)
