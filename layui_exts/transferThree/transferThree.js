@@ -1,7 +1,7 @@
 /*
-* @Author: Dmego
-* @Date:   2018-12-29
-* @Address: 
+* @Author:  Dmego
+* @Date:    2018-12-29
+* @Address: https://github.com/dmego/layui-transferThree
 */
 layui.define('table', function (exports) {
     "use strict";
